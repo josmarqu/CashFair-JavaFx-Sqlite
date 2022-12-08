@@ -11,7 +11,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cashfair.views.HistoryViewController">
    <top>
-      <Label text="CashFair" BorderPane.alignment="CENTER">
+      <Label text="CashFair - Payment History " BorderPane.alignment="CENTER">
          <font>
             <Font name="Cantarell Regular" size="25.0" />
          </font>

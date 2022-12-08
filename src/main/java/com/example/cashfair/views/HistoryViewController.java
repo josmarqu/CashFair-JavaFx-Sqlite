@@ -2,10 +2,9 @@ package com.example.cashfair.views;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableView;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,8 +21,30 @@ public class HistoryViewController implements Initializable {
     private Button detailsBtn;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        historyLstVw.getItems().add("Item 1");
-        historyLstVw.getItems().add("Item 2");
-        historyLstVw.getItems().add("Item 3");
+        historyLstVw.setCellFactory(stringListView -> new CenteredListViewCell());
+        historyLstVw.getItems().add("Uber Eats");
+        historyLstVw.getItems().add("Bono bus");
+        historyLstVw.getItems().add("Port Aventura");
+    }
+
+    final class CenteredListViewCell extends ListCell<String> {
+        @Override
+        protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty) {
+                setGraphic(null);
+            } else {
+                // Create the HBox
+                HBox hBox = new HBox();
+                hBox.setAlignment(Pos.CENTER);
+
+                // Create centered Label
+                Label label = new Label(item);
+                label.setAlignment(Pos.CENTER);
+
+                hBox.getChildren().add(label);
+                setGraphic(hBox);
+            }
+        }
     }
 }
