@@ -12,10 +12,14 @@ public class App extends Application {
     private static Scene scene;
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("concept-screen"), 1366, 768);
+        scene = new Scene(loadFXML("history-screen"), 1366, 768);
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
+    }
+
+    public static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
