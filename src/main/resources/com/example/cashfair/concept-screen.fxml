@@ -19,9 +19,9 @@
    <center>
       <TableView fx:id="conceptTbl" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="cptNameCol" minWidth="-1.0" prefWidth="-1.0" text="Name" />
-          <TableColumn fx:id="cptAmountCol" maxWidth="2500.0" minWidth="-1.0" prefWidth="-1.0" text="Amount" />
-            <TableColumn fx:id="cptPerCol" maxWidth="2500.0" minWidth="-1.0" prefWidth="-1.0" text="\%" />
+          <TableColumn fx:id="cptNameCol" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment: CENTER;" text="Name" />
+          <TableColumn fx:id="cptAmountCol" maxWidth="2500.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment: CENTER;" text="Amount" />
+            <TableColumn fx:id="cptPerCol" maxWidth="2500.0" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment: CENTER;" text="\%" />
         </columns>
          <BorderPane.margin>
             <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />

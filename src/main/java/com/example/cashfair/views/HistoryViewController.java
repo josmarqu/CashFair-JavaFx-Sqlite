@@ -27,6 +27,8 @@ public class HistoryViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         detailsBtn.setOnAction((ActionEvent a) -> showConceptDetails());
         historyLstVw.setCellFactory(stringListView -> new CenteredListViewCell());
+
+        // ListView adding text test TODO: add text using xml data
         historyLstVw.getItems().add("Uber Eats");
         historyLstVw.getItems().add("Bono bus");
         historyLstVw.getItems().add("Port Aventura");
