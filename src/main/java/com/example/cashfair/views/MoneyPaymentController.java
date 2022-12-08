@@ -1,6 +1,7 @@
 package com.example.cashfair.views;
 
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -29,6 +30,16 @@ public class MoneyPaymentController implements Initializable {
         moneyPaymentSpnr.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 0));
         moneyPaymentSpnr.setEditable(true);
 
+        addItemsComboBox();
 
+    }
+
+    private void addItemsComboBox() {
+        moneyPaymentScrp.setItems(FXCollections.observableArrayList(
+                "$",
+                "€",
+                "¥",
+                "£"
+        ));
     }
 }

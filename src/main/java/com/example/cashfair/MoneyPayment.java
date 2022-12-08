@@ -14,7 +14,7 @@ public class MoneyPayment extends Application {
     private static Scene scene;
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("money-payment"), 1000, 500);
+        scene = new Scene(loadFXML("money-payment"), 800, 450);
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
