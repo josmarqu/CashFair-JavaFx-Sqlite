@@ -1,11 +1,15 @@
 package com.example.cashfair.views;
 
+import com.example.cashfair.App;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,11 +25,14 @@ public class HistoryViewController implements Initializable {
     private Button detailsBtn;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        detailsBtn.setOnAction((ActionEvent a) -> showConceptDetails());
         historyLstVw.setCellFactory(stringListView -> new CenteredListViewCell());
         historyLstVw.getItems().add("Uber Eats");
         historyLstVw.getItems().add("Bono bus");
         historyLstVw.getItems().add("Port Aventura");
     }
+
+
 
     final class CenteredListViewCell extends ListCell<String> {
         @Override
@@ -46,5 +53,9 @@ public class HistoryViewController implements Initializable {
                 setGraphic(hBox);
             }
         }
+    }
+
+    private static void showConceptDetails()  {
+        App.redirectTo("concept-screen");
     }
 }

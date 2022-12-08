@@ -8,20 +8,20 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cashfair.views.ConceptViewController">
    <top>
-      <Label text="Concept/Date" BorderPane.alignment="CENTER">
+      <Label fx:id="conceptLbl" text="Concept/Date" BorderPane.alignment="CENTER">
          <font>
             <Font name="Cantarell Regular" size="25.0" />
          </font>
       </Label>
    </top>
    <center>
-      <TableView BorderPane.alignment="CENTER">
+      <TableView fx:id="conceptTbl" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn minWidth="-1.0" prefWidth="-1.0" text="Name" />
-          <TableColumn maxWidth="2500.0" minWidth="-1.0" prefWidth="-1.0" text="Amount" />
-            <TableColumn maxWidth="2500.0" minWidth="-1.0" prefWidth="-1.0" text="\%" />
+          <TableColumn fx:id="cptNameCol" minWidth="-1.0" prefWidth="-1.0" text="Name" />
+          <TableColumn fx:id="cptAmountCol" maxWidth="2500.0" minWidth="-1.0" prefWidth="-1.0" text="Amount" />
+            <TableColumn fx:id="cptPerCol" maxWidth="2500.0" minWidth="-1.0" prefWidth="-1.0" text="\%" />
         </columns>
          <BorderPane.margin>
             <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
@@ -32,7 +32,7 @@
       </TableView>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" prefWidth="100.0" text="Back" BorderPane.alignment="CENTER">
+      <Button fx:id="backBtn" mnemonicParsing="false" prefWidth="100.0" text="Back" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" />
          </BorderPane.margin>
