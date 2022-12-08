@@ -12,24 +12,24 @@
 
 
 <BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cashfair.views.MoneyPaymentController">
-   <top>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+   <bottom>
+      <AnchorPane prefHeight="358.0" prefWidth="444.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="moneyPaymentTable" layoutX="119.0" layoutY="111.0" prefHeight="219.0" prefWidth="363.0">
+            <TableView fx:id="moneyPaymentTable" layoutX="50.0" layoutY="115.0" prefHeight="190.0" prefWidth="333.0">
               <columns>
-                <TableColumn prefWidth="112.0" text="Person" />
-                <TableColumn prefWidth="195.0" text="Amount" />
+                <TableColumn fx:id="personCell" editable="false" prefWidth="112.0" text="Person" />
+                <TableColumn fx:id="amountCell" editable="false" prefWidth="250.0" text="Amount" />
               </columns>
             </TableView>
-            <Button layoutX="262.0" layoutY="351.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Apply" />
-            <ComboBox fx:id="moneyPaymentScrp" layoutX="180.0" layoutY="69.0" prefHeight="25.0" prefWidth="105.0" promptText="Currency" />
-            <Spinner fx:id="moneyPaymentSpnr" layoutX="324.0" layoutY="69.0" prefHeight="25.0" prefWidth="76.0" />
-            <Label layoutX="247.0" layoutY="14.0" prefHeight="36.0" prefWidth="168.0" text="Payments" textAlignment="CENTER">
+            <Button layoutX="184.0" layoutY="323.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Apply" />
+            <ComboBox fx:id="moneyPaymentScrp" layoutX="111.0" layoutY="69.0" prefHeight="25.0" prefWidth="105.0" promptText="Currency" />
+            <Spinner fx:id="moneyPaymentSpnr" layoutX="255.0" layoutY="69.0" prefHeight="25.0" prefWidth="76.0" />
+            <Label layoutX="153.0" layoutY="14.0" prefHeight="36.0" prefWidth="168.0" text="Payments" textAlignment="CENTER">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-   </top>
+   </bottom>
 </BorderPane>
