@@ -1,8 +1,7 @@
 package com.example.cashfair.views;
 
 import com.example.cashfair.App;
-import com.example.cashfair.entities.Person;
-import javafx.event.ActionEvent;
+import com.example.cashfair.entities.Contributor;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,11 +16,11 @@ public class AddPersonController {
     @FXML
     private TextField txtName;
     @FXML
-    private TableView<Person> tblPerson;
+    private TableView<Contributor> tblPerson;
     @FXML
-    private TableColumn<Person, String> colName;
+    private TableColumn<Contributor, String> colName;
     @FXML
-    private TableColumn<Person, Double> colPor;
+    private TableColumn<Contributor, Double> colPor;
     @FXML
     private Button btnRem;
     @FXML
@@ -29,6 +28,8 @@ public class AddPersonController {
 
     @FXML
     private Button btnBac;
+
+    public static ArrayList<Contributor> people = new ArrayList<>();
     @FXML
     public void initialize() {
         spnPor.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100, 1));
@@ -62,18 +63,18 @@ public class AddPersonController {
                 alert.setContentText("Person added");
                 alert.showAndWait();
 
-                Person person = new Person(txtName.getText(), spnPor.getValue());
+                Contributor contributor = new Contributor(txtName.getText(), 0.0, spnPor.getValue());
 
                 colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-                colPor.setCellValueFactory(new PropertyValueFactory<>("porc"));
-                tblPerson.getItems().add(person);
+                colPor.setCellValueFactory(new PropertyValueFactory<>("percentage"));
+                tblPerson.getItems().add(contributor);
 
                 clean();
             }
 
             btnRem.setOnAction(event2 -> {
-                Person person = tblPerson.getSelectionModel().getSelectedItem();
-                tblPerson.getItems().remove(person);
+                Contributor contributor = tblPerson.getSelectionModel().getSelectedItem();
+                tblPerson.getItems().remove(contributor);
             });
 
             btnBac.setOnAction(event3 -> App.redirectTo("home-screen"));
@@ -100,8 +101,10 @@ public class AddPersonController {
                     alert.setContentText("People added");
                     alert.showAndWait();
 
-                    ArrayList<Person> people = new ArrayList<>();
                     people.addAll(tblPerson.getItems());
+
+                    MoneyPaymentController moneyPayCont = new MoneyPaymentController();
+                    moneyPayCont.getDataPeople(people);
 
                     App.redirectTo("money-payment");
                 }
@@ -111,8 +114,8 @@ public class AddPersonController {
 
     private Double sumPor() {
         Double sum = 0.0;
-        for (Person person : tblPerson.getItems()) {
-            sum += person.getPorc();
+        for (Contributor person : tblPerson.getItems()) {
+            sum += person.getPercentage();
         }
         return sum;
     }

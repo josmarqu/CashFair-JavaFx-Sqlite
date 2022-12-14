@@ -3,8 +3,8 @@ package com.example.cashfair.entities;
 public class Contributor {
     private String name;
     private double money;
-    private int percentage;
-    public Contributor(String name, double money, int percentage) {
+    private double percentage;
+    public Contributor(String name, double money, double percentage) {
         this.name = name;
         this.money = money;
         this.percentage = percentage;
@@ -26,11 +26,11 @@ public class Contributor {
         this.money = money;
     }
 
-    public int getPercentage() {
+    public double getPercentage() {
         return percentage;
     }
 
-    public void setPercentage(int percentage) {
+    public void setPercentage(double percentage) {
         this.percentage = percentage;
     }
 }
