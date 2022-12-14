@@ -44,6 +44,13 @@ public class AddPersonController {
                 alert.setContentText("You must enter the distribution");
                 alert.showAndWait();
             }
+            else if (spnPor.getValue() + sumPor() > 100) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("The porcentage cannot be more than 100%");
+                alert.showAndWait();
+            }
             else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information");
@@ -87,6 +94,14 @@ public class AddPersonController {
                 }
             });
         });
+    }
+
+    private Double sumPor() {
+        Double sum = 0.0;
+        for (Person person : tblPerson.getItems()) {
+            sum += person.getPorc();
+        }
+        return sum;
     }
 
     private void clean() {
