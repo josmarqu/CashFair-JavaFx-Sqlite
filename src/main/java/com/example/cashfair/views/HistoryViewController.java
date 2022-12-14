@@ -32,6 +32,8 @@ public class HistoryViewController implements Initializable {
         historyLstVw.getItems().add("Uber Eats");
         historyLstVw.getItems().add("Bono bus");
         historyLstVw.getItems().add("Port Aventura");
+
+        backBtn.setOnAction((ActionEvent a) -> App.redirectTo("home-screen"));
     }
 
 

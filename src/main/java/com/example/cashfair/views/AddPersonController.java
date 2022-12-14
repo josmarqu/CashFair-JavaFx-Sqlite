@@ -2,6 +2,7 @@ package com.example.cashfair.views;
 
 import com.example.cashfair.App;
 import com.example.cashfair.entities.Person;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,6 +26,9 @@ public class AddPersonController {
     private Button btnRem;
     @FXML
     private Button btnNex;
+
+    @FXML
+    private Button btnBac;
     @FXML
     public void initialize() {
         spnPor.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100, 1));
@@ -72,12 +76,21 @@ public class AddPersonController {
                 tblPerson.getItems().remove(person);
             });
 
-            btnNex.setOnAction(event3 -> {
+            btnBac.setOnAction(event3 -> App.redirectTo("home-screen"));
+
+            btnNex.setOnAction(event4 -> {
                 if (tblPerson.getItems().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Error");
                     alert.setContentText("You must add at least one person");
+                    alert.showAndWait();
+                }
+                else if (sumPor() != 100) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error");
+                    alert.setContentText("The porcentage must be 100%");
                     alert.showAndWait();
                 }
                 else {
