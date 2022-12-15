@@ -1,6 +1,7 @@
 package com.example.cashfair.views;
 
 import com.example.cashfair.App;
+import com.example.cashfair.entities.Concept;
 import com.example.cashfair.entities.Contributor;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ConceptViewController implements Initializable {
@@ -31,6 +33,9 @@ public class ConceptViewController implements Initializable {
     private TableColumn<Contributor, Integer> cptPerCol;
     @FXML
     private Button backBtn;
+    public static ArrayList<Contributor> listContributors;
+    public static Concept concept;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backBtn.setOnAction((ActionEvent a) -> App.redirectTo("history-screen"));
@@ -41,7 +46,25 @@ public class ConceptViewController implements Initializable {
         cptPerCol.setCellValueFactory(new PropertyValueFactory<>("percentage"));
         conceptTbl.getItems().add(
                 new Contributor("Juan", 50.0, 100));
+        fillTable();
     }
+
+    private void fillTable() {
+        for (Contributor contributor : listContributors) {
+           conceptTbl.setItems(FXCollections.observableArrayList(listContributors));
+        }
+        conceptLbl.setText(concept.getConceptName() + "/" + concept.getDate());
+    }
+
+    public void getDataPeople(ArrayList<Contributor> contributorsSent, Concept conceptSent) {
+        listContributors = contributorsSent;
+        concept = conceptSent;
+
+    }
+
+
+
+
 
 
 }

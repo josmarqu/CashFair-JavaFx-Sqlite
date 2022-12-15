@@ -1,6 +1,8 @@
 package com.example.cashfair.views;
 
 import com.example.cashfair.App;
+import com.example.cashfair.entities.Concept;
+import com.example.cashfair.entities.Contributor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,6 +13,7 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class HistoryViewController implements Initializable {
@@ -23,18 +26,18 @@ public class HistoryViewController implements Initializable {
     private Button backBtn;
     @FXML
     private Button detailsBtn;
+
+    public  static Concept concept;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         detailsBtn.setOnAction((ActionEvent a) -> showConceptDetails());
         historyLstVw.setCellFactory(stringListView -> new CenteredListViewCell());
-
-        // ListView adding text test TODO: add text using xml data
-        historyLstVw.getItems().add("Uber Eats");
-        historyLstVw.getItems().add("Bono bus");
-        historyLstVw.getItems().add("Port Aventura");
-
         backBtn.setOnAction((ActionEvent a) -> App.redirectTo("home-screen"));
+        if (concept != null) {
+            historyLstVw.getItems().add(concept.getConceptName());
+        }
     }
+
 
 
 
@@ -59,7 +62,25 @@ public class HistoryViewController implements Initializable {
         }
     }
 
-    private static void showConceptDetails()  {
-        App.redirectTo("concept-screen");
+    public void getDataConcept(Concept sentConcept) {
+        concept = sentConcept;
+    }
+
+    private void showConceptDetails()  {
+        if (historyLstVw.getSelectionModel().getSelectedItem() != null) {
+            ArrayList<Contributor> contributors = new ArrayList<>();
+            contributors = concept.getListContributor();
+            ConceptViewController concviewcont = new ConceptViewController();
+            concviewcont.getDataPeople(contributors, concept);
+            App.redirectTo("concept-screen");
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error");
+            alert.setContentText("You must select a concept");
+            alert.showAndWait();
+        }
+
     }
 }

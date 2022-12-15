@@ -8,7 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 
-public class AddPersonController {
+public class AddContributorController {
     @FXML
     private Spinner<Double> spnPor;
     @FXML
@@ -16,7 +16,7 @@ public class AddPersonController {
     @FXML
     private TextField txtName;
     @FXML
-    private TableView<Contributor> tblPerson;
+    private TableView<Contributor> tblContributor;
     @FXML
     private TableColumn<Contributor, String> colName;
     @FXML
@@ -29,11 +29,12 @@ public class AddPersonController {
     @FXML
     private Button btnBac;
 
-    public static ArrayList<Contributor> people = new ArrayList<>();
+    public static ArrayList<Contributor> contributors = new ArrayList<>();
     @FXML
     public void initialize() {
         spnPor.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100, 1));
 
+        btnBac.setOnAction(event3 -> App.redirectTo("home-screen"));
         btnAdd.setOnAction(event -> {
             if(txtName.getText().isBlank()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -60,31 +61,29 @@ public class AddPersonController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information");
                 alert.setHeaderText("Information");
-                alert.setContentText("Person added");
+                alert.setContentText("Contributor added");
                 alert.showAndWait();
 
                 Contributor contributor = new Contributor(txtName.getText(), 0.0, spnPor.getValue());
 
                 colName.setCellValueFactory(new PropertyValueFactory<>("name"));
                 colPor.setCellValueFactory(new PropertyValueFactory<>("percentage"));
-                tblPerson.getItems().add(contributor);
+                tblContributor.getItems().add(contributor);
 
                 clean();
             }
 
             btnRem.setOnAction(event2 -> {
-                Contributor contributor = tblPerson.getSelectionModel().getSelectedItem();
-                tblPerson.getItems().remove(contributor);
+                Contributor contributor = tblContributor.getSelectionModel().getSelectedItem();
+                tblContributor.getItems().remove(contributor);
             });
 
-            btnBac.setOnAction(event3 -> App.redirectTo("home-screen"));
-
             btnNex.setOnAction(event4 -> {
-                if (tblPerson.getItems().isEmpty()) {
+                if (tblContributor.getItems().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Error");
-                    alert.setContentText("You must add at least one person");
+                    alert.setContentText("You must add at least one contributor");
                     alert.showAndWait();
                 }
                 else if (sumPor() != 100) {
@@ -98,13 +97,13 @@ public class AddPersonController {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information");
                     alert.setHeaderText("Information");
-                    alert.setContentText("People added");
+                    alert.setContentText("Contributors added");
                     alert.showAndWait();
 
-                    people.addAll(tblPerson.getItems());
+                    contributors.addAll(tblContributor.getItems());
 
                     MoneyPaymentController moneyPayCont = new MoneyPaymentController();
-                    moneyPayCont.getDataPeople(people);
+                    moneyPayCont.getDataPeople(contributors);
 
                     App.redirectTo("money-payment");
                 }
@@ -114,7 +113,7 @@ public class AddPersonController {
 
     private Double sumPor() {
         Double sum = 0.0;
-        for (Contributor person : tblPerson.getItems()) {
+        for (Contributor person : tblContributor.getItems()) {
             sum += person.getPercentage();
         }
         return sum;

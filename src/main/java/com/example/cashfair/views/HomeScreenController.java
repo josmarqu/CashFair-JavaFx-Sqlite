@@ -14,7 +14,7 @@ public class HomeScreenController {
     @FXML
     public void initialize() {
         btnPay.setOnAction(event -> {
-            App.redirectTo("addPerson");
+            App.redirectTo("addContributor");
         });
         btnHis.setOnAction(event -> {
             App.redirectTo("history-screen");

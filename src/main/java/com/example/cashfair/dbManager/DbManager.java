@@ -13,4 +13,9 @@ public class DbManager {
         Connection conexion = DriverManager.getConnection(url, usuario, "");
 
     }
+
+    public static void insertData() {
+
+    }
+
 }

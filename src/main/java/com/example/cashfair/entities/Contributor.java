@@ -33,4 +33,13 @@ public class Contributor {
     public void setPercentage(double percentage) {
         this.percentage = percentage;
     }
+
+    @Override
+    public String toString() {
+        return "Contributor{" +
+                "name='" + name + '\'' +
+                ", money=" + money +
+                ", percentage=" + percentage +
+                '}';
+    }
 }

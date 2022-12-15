@@ -1,6 +1,8 @@
 package com.example.cashfair.views;
 
 
+import com.example.cashfair.App;
+import com.example.cashfair.entities.Concept;
 import com.example.cashfair.entities.Contributor;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -10,7 +12,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MoneyPaymentController implements Initializable {
@@ -33,7 +38,16 @@ public class MoneyPaymentController implements Initializable {
     @FXML
     private Button btnApply;
 
-    public static ArrayList<Contributor> people;
+    @FXML
+    private Button btnBack;
+
+    @FXML
+    private Button btnNext;
+
+    public static ArrayList<Contributor> listContributors;
+    Concept concept;
+    LocalDate currentDate;
+    String conceptName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,7 +61,7 @@ public class MoneyPaymentController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Error");
-                alert.setContentText("You must add the money to distribute");
+                alert.setContentText("You must add the type of currency");
                 alert.showAndWait();
             }
             else {
@@ -59,21 +73,55 @@ public class MoneyPaymentController implements Initializable {
                 alert.showAndWait();
             }
         });
+
+        btnBack.setOnAction(event -> {
+            App.redirectTo("addContributor");
+        });
+
+        btnNext.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Are you sure you want to make the payment?");
+
+            ButtonType buttonYes = new ButtonType("Yes");
+            ButtonType buttonNo = new ButtonType("No");
+
+            alert.getButtonTypes().setAll(buttonYes, buttonNo);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonYes) {
+                storeData();
+            } else {
+                // Go back
+            }
+        });
+    }
+
+    private void storeData() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Request for concept name");
+        dialog.setHeaderText("Please enter the name of the concept:");
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(concept -> conceptName = concept);
+        currentDate = LocalDate.now();
+        concept = new Concept(listContributors, moneyPaymentScrp.getValue(), String.valueOf(currentDate),conceptName);
+        HistoryViewController histviewcont = new HistoryViewController();
+        histviewcont.getDataConcept(concept);
+        App.redirectTo("home-screen");
     }
 
     private void addTableItem() {
-        for (Contributor contributor : people) {
+        for (Contributor contributor : listContributors) {
             contributor.setMoney(moneyPaymentSpnr.getValue() * contributor.getPercentage() / 100);
         }
 
         personCell.setCellValueFactory(new PropertyValueFactory<>("name"));
         amountCell.setCellValueFactory(new PropertyValueFactory<>("money"));
-        moneyPaymentTable.setItems(FXCollections.observableArrayList(people));
-
+        moneyPaymentTable.setItems(FXCollections.observableArrayList(listContributors));
     }
 
-    public void getDataPeople(ArrayList<Contributor> peopleSent) {
-        people = peopleSent;
+    public void getDataPeople(ArrayList<Contributor> contributorsSent) {
+        listContributors = contributorsSent;
     }
 
     private void addItemsComboBox() {

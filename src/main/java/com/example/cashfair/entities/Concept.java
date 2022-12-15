@@ -3,20 +3,21 @@ package com.example.cashfair.entities;
 import java.util.ArrayList;
 
 public class Concept {
-    public ArrayList<Contributor> ListPerson;
-    public double money;
+    public ArrayList<Contributor> ListContributor;
     public String currency;
     public String date;
 
-    public Concept(ArrayList<Contributor> ListPerson, double money, String currency, String date) {
-        this.ListPerson = ListPerson;
-        this.money = money;
+    public String conceptName;
+
+    public Concept(ArrayList<Contributor> ListContributor,  String currency, String date, String conceptName) {
+        this.ListContributor= ListContributor;
         this.currency = currency;
         this.date = date;
+        this.conceptName = conceptName;
     }
 
-    public ArrayList<Contributor> getListPerson() {
-        return ListPerson;
+    public ArrayList<Contributor> getListContributor() {
+        return ListContributor;
     }
 
     public String getDate() {
@@ -24,6 +25,20 @@ public class Concept {
     }
 
     public void removePerson(int i) {
-        ListPerson.remove(i);
+        ListContributor.remove(i);
+    }
+
+    public String getConceptName() {
+        return conceptName;
+    }
+
+    @Override
+    public String toString() {
+        return "Concept{" +
+                "ListContributor=" + ListContributor +
+                ", currency='" + currency + '\'' +
+                ", date='" + date + '\'' +
+                ", conceptName='" + conceptName + '\'' +
+                '}';
     }
 }
