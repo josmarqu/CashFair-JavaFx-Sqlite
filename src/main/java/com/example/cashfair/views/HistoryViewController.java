@@ -26,10 +26,13 @@ public class HistoryViewController implements Initializable {
     private Button backBtn;
     @FXML
     private Button detailsBtn;
-
     public  static Concept concept;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeWidgets();
+    }
+
+    private void initializeWidgets() {
         detailsBtn.setOnAction((ActionEvent a) -> showConceptDetails());
         historyLstVw.setCellFactory(stringListView -> new CenteredListViewCell());
         backBtn.setOnAction((ActionEvent a) -> App.redirectTo("home-screen"));
@@ -37,8 +40,6 @@ public class HistoryViewController implements Initializable {
             historyLstVw.getItems().add(concept.getConceptName());
         }
     }
-
-
 
 
     final class CenteredListViewCell extends ListCell<String> {
@@ -75,11 +76,7 @@ public class HistoryViewController implements Initializable {
             App.redirectTo("concept-screen");
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error");
-            alert.setContentText("You must select a concept");
-            alert.showAndWait();
+            App.showAlert(Alert.AlertType.ERROR, "You must select a concept");
         }
 
     }

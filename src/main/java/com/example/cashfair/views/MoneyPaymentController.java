@@ -45,51 +45,40 @@ public class MoneyPaymentController implements Initializable {
     private Button btnNext;
 
     public static ArrayList<Contributor> listContributors;
+    Boolean answer;
+    String answerTxt;
+    Alert alert;
     Concept concept;
+    HistoryViewController histview;
+    AddContributorController addcont;
     LocalDate currentDate;
     String conceptName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeWidgets();
+    }
+
+    private void initializeWidgets() {
         moneyPaymentSpnr.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 1000, 0, 0.5));
-        moneyPaymentSpnr.setEditable(true);;
-
+        moneyPaymentSpnr.setEditable(true);
         addItemsComboBox();
-
         btnApply.setOnAction(event -> {
             if (moneyPaymentScrp.getValue() == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error");
-                alert.setContentText("You must add the type of currency");
-                alert.showAndWait();
+                App.showAlert(Alert.AlertType.ERROR, "You must add the type of currency");
             }
             else {
-                addTableItem();
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information");
-                alert.setHeaderText("Information");
-                alert.setContentText("The money has been distributed");
-                alert.showAndWait();
+                addTableItems();
+                App.showAlert(Alert.AlertType.INFORMATION, "The money has been distributed");
             }
         });
-
         btnBack.setOnAction(event -> {
             App.redirectTo("addContributor");
+            listContributors.clear();
         });
-
         btnNext.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation");
-            alert.setHeaderText("Are you sure you want to make the payment?");
-
-            ButtonType buttonYes = new ButtonType("Yes");
-            ButtonType buttonNo = new ButtonType("No");
-
-            alert.getButtonTypes().setAll(buttonYes, buttonNo);
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == buttonYes) {
+            answer = App.showAlert(Alert.AlertType.CONFIRMATION, "Are you sure you want to make the payment?");
+            if (answer = true) {
                 storeData();
             } else {
                 // Go back
@@ -98,23 +87,21 @@ public class MoneyPaymentController implements Initializable {
     }
 
     private void storeData() {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Request for concept name");
-        dialog.setHeaderText("Please enter the name of the concept:");
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(concept -> conceptName = concept);
+        answerTxt = App.showDialog("Request for concept name", "Please enter the name of the concept");
         currentDate = LocalDate.now();
-        concept = new Concept(listContributors, moneyPaymentScrp.getValue(), String.valueOf(currentDate),conceptName);
-        HistoryViewController histviewcont = new HistoryViewController();
-        histviewcont.getDataConcept(concept);
+        concept = new Concept(listContributors, moneyPaymentScrp.getValue(), String.valueOf(currentDate),answerTxt);
+        histview = new HistoryViewController();
+        histview.getDataConcept(concept);
         App.redirectTo("home-screen");
+        listContributors.clear();
+        addcont = new AddContributorController();
+        addcont.emptyFields();
     }
 
-    private void addTableItem() {
+    private void addTableItems() {
         for (Contributor contributor : listContributors) {
             contributor.setMoney(moneyPaymentSpnr.getValue() * contributor.getPercentage() / 100);
         }
-
         personCell.setCellValueFactory(new PropertyValueFactory<>("name"));
         amountCell.setCellValueFactory(new PropertyValueFactory<>("money"));
         moneyPaymentTable.setItems(FXCollections.observableArrayList(listContributors));
