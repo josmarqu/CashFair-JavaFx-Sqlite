@@ -2,6 +2,7 @@ package com.example.cashfair.views;
 
 
 import com.example.cashfair.App;
+import com.example.cashfair.dbManager.DbManager;
 import com.example.cashfair.entities.Concept;
 import com.example.cashfair.entities.Contributor;
 import javafx.collections.FXCollections;
@@ -12,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -47,19 +49,20 @@ public class MoneyPaymentController implements Initializable {
     public static ArrayList<Contributor> listContributors;
     Boolean answer;
     String answerTxt;
-    Alert alert;
     Concept concept;
-    HistoryViewController histview;
+    DbManager dbManager;
     AddContributorController addcont;
     LocalDate currentDate;
-    String conceptName;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeWidgets();
     }
 
-    private void initializeWidgets() {
+    private void initializeWidgets()  {
+        personCell.setCellValueFactory(new PropertyValueFactory<>("name"));
+        initColAmount();
         moneyPaymentSpnr.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 1000, 0, 0.5));
         moneyPaymentSpnr.setEditable(true);
         addItemsComboBox();
@@ -73,8 +76,9 @@ public class MoneyPaymentController implements Initializable {
             }
         });
         btnBack.setOnAction(event -> {
+            addcont = new AddContributorController();
+            addcont.getData(listContributors);
             App.redirectTo("addContributor");
-            listContributors.clear();
         });
         btnNext.setOnAction(event -> {
             answer = App.showAlert(Alert.AlertType.CONFIRMATION, "Are you sure you want to make the payment?");
@@ -86,12 +90,27 @@ public class MoneyPaymentController implements Initializable {
         });
     }
 
-    private void storeData() {
+    private void initColAmount() {
+        amountCell.setCellValueFactory(new PropertyValueFactory<>("money"));
+        amountCell.setCellFactory(tc -> new TableCell<Contributor, Double>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText(null);
+                } else {
+                    setText(App.CONVERTER.toString(item));
+                }
+            }
+        });
+    }
+
+    private void storeData()  {
         answerTxt = App.showDialog("Request for concept name", "Please enter the name of the concept");
         currentDate = LocalDate.now();
         concept = new Concept(listContributors, moneyPaymentScrp.getValue(), String.valueOf(currentDate),answerTxt);
-        histview = new HistoryViewController();
-        histview.getDataConcept(concept);
+        dbManager = new DbManager();
+        dbManager.insertData(concept);
         App.redirectTo("home-screen");
         listContributors.clear();
         addcont = new AddContributorController();
@@ -102,8 +121,6 @@ public class MoneyPaymentController implements Initializable {
         for (Contributor contributor : listContributors) {
             contributor.setMoney(moneyPaymentSpnr.getValue() * contributor.getPercentage() / 100);
         }
-        personCell.setCellValueFactory(new PropertyValueFactory<>("name"));
-        amountCell.setCellValueFactory(new PropertyValueFactory<>("money"));
         moneyPaymentTable.setItems(FXCollections.observableArrayList(listContributors));
     }
 

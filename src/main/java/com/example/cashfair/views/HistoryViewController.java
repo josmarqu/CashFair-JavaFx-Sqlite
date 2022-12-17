@@ -1,6 +1,7 @@
 package com.example.cashfair.views;
 
 import com.example.cashfair.App;
+import com.example.cashfair.dbManager.DbManager;
 import com.example.cashfair.entities.Concept;
 import com.example.cashfair.entities.Contributor;
 import javafx.event.ActionEvent;
@@ -26,7 +27,9 @@ public class HistoryViewController implements Initializable {
     private Button backBtn;
     @FXML
     private Button detailsBtn;
-    public  static Concept concept;
+    ConceptViewController concViewCont;
+    private static ArrayList<String> listConcepts;
+    DbManager dbManager;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeWidgets();
@@ -36,11 +39,26 @@ public class HistoryViewController implements Initializable {
         detailsBtn.setOnAction((ActionEvent a) -> showConceptDetails());
         historyLstVw.setCellFactory(stringListView -> new CenteredListViewCell());
         backBtn.setOnAction((ActionEvent a) -> App.redirectTo("home-screen"));
-        if (concept != null) {
-            historyLstVw.getItems().add(concept.getConceptName());
+        dbManager = new DbManager();
+        listConcepts = dbManager.getConceptNames();
+        if (!listConcepts.isEmpty()) {
+            for (String concept_name: listConcepts) {
+                historyLstVw.getItems().add(concept_name);
+            }
         }
     }
 
+    private void showConceptDetails() {
+        concViewCont = new ConceptViewController();
+        if (historyLstVw.getSelectionModel().isEmpty()){
+            App.showAlert(Alert.AlertType.ERROR, "You must select a concept");
+        }
+        else {
+            String conceptName = historyLstVw.getSelectionModel().getSelectedItem().toString();
+            concViewCont.getConceptName(conceptName);
+            App.redirectTo("concept-screen");
+        }
+    }
 
     final class CenteredListViewCell extends ListCell<String> {
         @Override
@@ -61,23 +79,5 @@ public class HistoryViewController implements Initializable {
                 setGraphic(hBox);
             }
         }
-    }
-
-    public void getDataConcept(Concept sentConcept) {
-        concept = sentConcept;
-    }
-
-    private void showConceptDetails()  {
-        if (historyLstVw.getSelectionModel().getSelectedItem() != null) {
-            ArrayList<Contributor> contributors = new ArrayList<>();
-            contributors = concept.getListContributor();
-            ConceptViewController concviewcont = new ConceptViewController();
-            concviewcont.getDataPeople(contributors, concept);
-            App.redirectTo("concept-screen");
-        }
-        else {
-            App.showAlert(Alert.AlertType.ERROR, "You must select a concept");
-        }
-
     }
 }

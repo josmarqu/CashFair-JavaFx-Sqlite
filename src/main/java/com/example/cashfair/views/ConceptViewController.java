@@ -1,6 +1,7 @@
 package com.example.cashfair.views;
 
 import com.example.cashfair.App;
+import com.example.cashfair.dbManager.DbManager;
 import com.example.cashfair.entities.Concept;
 import com.example.cashfair.entities.Contributor;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,10 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -30,41 +28,65 @@ public class ConceptViewController implements Initializable {
     @FXML
     private TableColumn<Contributor, Double> cptAmountCol;
     @FXML
-    private TableColumn<Contributor, Integer> cptPerCol;
+    private TableColumn<Contributor, Double> cptPerCol;
     @FXML
     private Button backBtn;
-    public static ArrayList<Contributor> listContributors;
     public static Concept concept;
+    DbManager dbManager;
+    public static String conceptName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         backBtn.setOnAction((ActionEvent a) -> App.redirectTo("history-screen"));
-
-        // TableView adding text test TODO: add text using xml data
         cptNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        cptAmountCol.setCellValueFactory(new PropertyValueFactory<>("money"));
-        cptPerCol.setCellValueFactory(new PropertyValueFactory<>("percentage"));
-        conceptTbl.getItems().add(
-                new Contributor("Juan", 50.0, 100));
-        fillTable();
+        initCptAmountCol();
+        initCptPerCol();
+        setData();
     }
 
-    private void fillTable() {
-        for (Contributor contributor : listContributors) {
-           conceptTbl.setItems(FXCollections.observableArrayList(listContributors));
+    private void initCptPerCol() {
+        cptPerCol.setCellValueFactory(new PropertyValueFactory<>("percentage"));
+        cptPerCol.setCellFactory(tc -> new TableCell<Contributor, Double>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText(null);
+                } else {
+                    setText(App.CONVERTER.toString(item));
+                }
+            }
+        });
+    }
+
+    private void initCptAmountCol() {
+        cptAmountCol.setCellValueFactory(new PropertyValueFactory<>("money"));
+        cptAmountCol.setCellFactory(tc -> new TableCell<Contributor, Double>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText(null);
+                } else {
+                    setText(App.CONVERTER.toString(item));
+                }
+            }
+        });
+    }
+
+
+
+    private void setData() {
+        dbManager = new DbManager();
+        concept = dbManager.getConcept(conceptName);
+        for (Contributor contributor : concept.getListContributor()) {
+            conceptTbl.setItems(FXCollections.observableArrayList(concept.getListContributor()));
         }
+        cptAmountCol.setText(concept.getCurrency());
         conceptLbl.setText(concept.getConceptName() + "/" + concept.getDate());
     }
 
-    public void getDataPeople(ArrayList<Contributor> contributorsSent, Concept conceptSent) {
-        listContributors = contributorsSent;
-        concept = conceptSent;
-
+    public void getConceptName(String sentConceptName) {
+        conceptName = sentConceptName;
     }
-
-
-
-
-
-
 }

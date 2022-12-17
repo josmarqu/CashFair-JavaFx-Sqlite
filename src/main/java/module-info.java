@@ -2,7 +2,7 @@ module com.example.cashfair {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    requires com.h2database;
+    requires org.json;
 
 
     opens com.example.cashfair to javafx.fxml;

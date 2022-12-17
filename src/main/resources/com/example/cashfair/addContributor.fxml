@@ -18,7 +18,6 @@
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnRem" alignment="CENTER" layoutX="196.0" layoutY="497.0" mnemonicParsing="false" text="Remove Contributor" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" />
             <TableView fx:id="tblContributor" layoutX="50.0" layoutY="138.0" minWidth="450.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
               <columns>
                 <TableColumn fx:id="colName" minWidth="-1.0" prefWidth="-1.0" style="-fx-alignment: CENTER;" text="Name" />
@@ -47,6 +46,20 @@
                      </font>
                   </Label>
                   <Button fx:id="btnAdd" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Contributor" GridPane.columnIndex="3" GridPane.valignment="TOP" />
+               </children>
+            </GridPane>
+            <GridPane layoutX="54.0" layoutY="492.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="btnRem" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Remove Contributor" textAlignment="CENTER" />
+                  <Button fx:id="btnSplit" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Distribute Funds Equally" GridPane.columnIndex="2" />
                </children>
             </GridPane>
          </children>

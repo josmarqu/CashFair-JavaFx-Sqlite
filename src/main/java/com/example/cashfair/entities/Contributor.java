@@ -1,5 +1,7 @@
 package com.example.cashfair.entities;
 
+import java.text.DecimalFormat;
+
 public class Contributor {
     private String name;
     private double money;

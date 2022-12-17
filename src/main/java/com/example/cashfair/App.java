@@ -8,8 +8,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Optional;
 
 public class App extends Application {
@@ -22,6 +24,7 @@ public class App extends Application {
     static Optional<String> resultStr;
     static boolean answer;
     static String answerTxt;
+    public static final NumberStringConverter CONVERTER = new NumberStringConverter("#.##");
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("home-screen"), 1366, 768);

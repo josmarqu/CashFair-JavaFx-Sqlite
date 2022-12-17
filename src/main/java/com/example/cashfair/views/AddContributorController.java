@@ -2,10 +2,13 @@ package com.example.cashfair.views;
 
 import com.example.cashfair.App;
 import com.example.cashfair.entities.Contributor;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class AddContributorController {
@@ -27,16 +30,19 @@ public class AddContributorController {
     private Button btnNex;
     @FXML
     private Button btnBac;
-    private Alert alert;
+    @FXML
+    private Button btnSplit;
     private static Contributor contributor;
     private MoneyPaymentController moneyPayCont;
-    public static ArrayList<Contributor> contributors = new ArrayList<>();
+    private static ArrayList<Contributor> listContributors = new ArrayList<>();
     @FXML
     public void initialize() {
         initializeWidgets();
     }
 
     private void initializeWidgets() {
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        initColPer();
         spnPor.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100, 1));
         btnBac.setOnAction(event3 -> {
             App.redirectTo("home-screen");
@@ -53,9 +59,33 @@ public class AddContributorController {
                 App.showAlert(Alert.AlertType.ERROR, "You must select a contributor");
             }
         });
-        if (contributor != null) {
-            fillTable();
+        btnSplit.setOnAction(event -> {
+            double size = tblContributor.getItems().size();
+            if (size >= 2) {
+                tblContributor.getItems().forEach(item -> item.setPercentage(100 / size));
+                tblContributor.refresh();
+            } else {
+                App.showAlert(Alert.AlertType.ERROR, "You must add at least two contributors");
+            }
+        });
+        if (!listContributors.isEmpty()) {
+            tblContributor.setItems(FXCollections.observableArrayList(listContributors));
         }
+    }
+
+    private void initColPer() {
+        colPor.setCellValueFactory(new PropertyValueFactory<>("percentage"));
+        colPor.setCellFactory(tc -> new TableCell<Contributor, Double>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText(null);
+                } else {
+                    setText(App.CONVERTER.toString(item));
+                }
+            }
+        });
     }
 
     private void transferDataToPayment() {
@@ -67,9 +97,9 @@ public class AddContributorController {
         }
         else {
             App.showAlert(Alert.AlertType.INFORMATION, "Contributors added");
-            contributors.addAll(tblContributor.getItems());
+            listContributors.addAll(tblContributor.getItems());
             moneyPayCont = new MoneyPaymentController();
-            moneyPayCont.getDataPeople(contributors);
+            moneyPayCont.getDataPeople(listContributors);
             App.redirectTo("money-payment");
         }
     }
@@ -93,8 +123,6 @@ public class AddContributorController {
     }
 
     public void fillTable() {
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colPor.setCellValueFactory(new PropertyValueFactory<>("percentage"));
         tblContributor.getItems().add(contributor);
     }
 
@@ -106,8 +134,11 @@ public class AddContributorController {
         return sum;
     }
 
+    public void getData(ArrayList<Contributor> listContributorsSent) {
+        listContributors = listContributorsSent;
+    }
+
     public void emptyFields() {
-        txtName.setText("");
-        spnPor.getValueFactory().setValue(1.0);
+        listContributors.clear();
     }
 }
