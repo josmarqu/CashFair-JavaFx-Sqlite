@@ -1,15 +1,12 @@
-package com.example.cashfair.dbManager;
-import com.example.cashfair.entities.Concept;
-import com.example.cashfair.entities.Contributor;
+package com.cashfair.dbManager;
+import com.cashfair.entities.Contributor;
+import com.cashfair.entities.Concept;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
 
 import java.sql.*;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 
 public class DbManager {
     final static  String FILE_NAME = "/home/jose/Trabajo/2añodam/Desarrollo de interfaces/Workspace/CashFair/CashFair/src/main/java/com/example/cashfair/db/CashFairDb.db";

@@ -1,18 +1,14 @@
-package com.example.cashfair.views;
+package com.cashfair.controllers;
 
-import com.example.cashfair.App;
-import com.example.cashfair.dbManager.DbManager;
-import com.example.cashfair.entities.Concept;
-import com.example.cashfair.entities.Contributor;
+import com.cashfair.App;
+import com.cashfair.dbManager.DbManager;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;

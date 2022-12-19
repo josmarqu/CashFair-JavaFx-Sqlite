@@ -1,4 +1,4 @@
-package com.example.cashfair;
+package com.cashfair;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.Optional;
 
 public class App extends Application {
@@ -46,7 +45,7 @@ public class App extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/src/main/resources/fxml/home-screen.fxml"));
         return fxmlLoader.load();
     }
     public static void main(String[] args) {

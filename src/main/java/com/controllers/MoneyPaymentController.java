@@ -1,10 +1,10 @@
-package com.example.cashfair.views;
+package com.cashfair.controllers;
 
 
-import com.example.cashfair.App;
-import com.example.cashfair.dbManager.DbManager;
-import com.example.cashfair.entities.Concept;
-import com.example.cashfair.entities.Contributor;
+import com.cashfair.App;
+import com.cashfair.dbManager.DbManager;
+import com.cashfair.entities.Concept;
+import com.cashfair.entities.Contributor;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,11 +13,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MoneyPaymentController implements Initializable {

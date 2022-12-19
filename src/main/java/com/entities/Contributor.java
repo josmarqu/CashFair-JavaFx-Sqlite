@@ -1,4 +1,4 @@
-package com.example.cashfair.entities;
+package com.cashfair.entities;
 
 import java.text.DecimalFormat;
 

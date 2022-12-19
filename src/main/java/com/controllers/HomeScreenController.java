@@ -1,6 +1,6 @@
-package com.example.cashfair.views;
+package com.cashfair.controllers;
 
-import com.example.cashfair.App;
+import com.cashfair.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 

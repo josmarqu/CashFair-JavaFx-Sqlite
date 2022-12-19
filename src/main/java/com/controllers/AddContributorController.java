@@ -1,14 +1,12 @@
-package com.example.cashfair.views;
+package com.cashfair.controllers;
 
-import com.example.cashfair.App;
-import com.example.cashfair.entities.Contributor;
+import com.cashfair.App;
+import com.cashfair.entities.Contributor;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class AddContributorController {
