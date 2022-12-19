@@ -1,4 +1,4 @@
-package com.cashfair.entities;
+package com.entities;
 
 import java.util.ArrayList;
 

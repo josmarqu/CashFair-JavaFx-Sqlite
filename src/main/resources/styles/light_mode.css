@@ -1,0 +1,24 @@
+
+* {
+    -fx-font-family: "Cantarell";
+}
+
+.button {
+    -fx-background-radius: 8px;
+    -fx-font-size: 15px;
+    -fx-background-color: #00a293;
+}
+
+#background {
+    -fx-background-color:#00524c ;
+}
+
+#background > *{
+    -fx-text-fill: #f8fefd;
+
+}
+
+#background > * > *{
+    -fx-text-fill: #f8fefd;
+
+}

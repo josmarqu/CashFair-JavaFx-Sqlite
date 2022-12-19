@@ -1,7 +1,7 @@
-package com.cashfair.controllers;
+package com.controllers;
 
-import com.cashfair.App;
-import com.cashfair.dbManager.DbManager;
+import com.App;
+import com.dbManager.DbManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

@@ -1,10 +1,10 @@
-package com.cashfair.controllers;
+package com.controllers;
 
 
-import com.cashfair.App;
-import com.cashfair.dbManager.DbManager;
-import com.cashfair.entities.Concept;
-import com.cashfair.entities.Contributor;
+import com.App;
+import com.dbManager.DbManager;
+import com.entities.Concept;
+import com.entities.Contributor;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

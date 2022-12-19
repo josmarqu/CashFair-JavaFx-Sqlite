@@ -1,4 +1,4 @@
-package com.cashfair;
+package com;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +10,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -23,10 +24,12 @@ public class App extends Application {
     static Optional<String> resultStr;
     static boolean answer;
     static String answerTxt;
+    static String style = "light_mode.css";
     public static final NumberStringConverter CONVERTER = new NumberStringConverter("#.##");
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("home-screen"), 1366, 768);
+        scene.getStylesheets().add(App.class.getResource("/styles/" + style).toExternalForm());
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
@@ -45,7 +48,7 @@ public class App extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/src/main/resources/fxml/home-screen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/views/" + fxml + ".fxml"));
         return fxmlLoader.load();
     }
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
-package com.cashfair.controllers;
+package com.controllers;
 
-import com.cashfair.App;
-import com.cashfair.entities.Contributor;
+import com.App;
+import com.entities.Contributor;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

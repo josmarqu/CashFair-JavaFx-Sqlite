@@ -1,6 +1,6 @@
-package com.cashfair.dbManager;
-import com.cashfair.entities.Contributor;
-import com.cashfair.entities.Concept;
+package com.dbManager;
+import com.entities.Contributor;
+import com.entities.Concept;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DbManager {
-    final static  String FILE_NAME = "/home/jose/Trabajo/2añodam/Desarrollo de interfaces/Workspace/CashFair/CashFair/src/main/java/com/example/cashfair/db/CashFairDb.db";
+    final static  String FILE_NAME = "CashFair/src/main/java/com/db/CashFairDb.db";
     final static String STMT_INSERT_CONCEPT =
             "INSERT INTO concepts (currency, date, concept_name, contributors) " +
             "VALUES (?, ?, ?, ?)";

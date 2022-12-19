@@ -5,12 +5,12 @@ module com.example.cashfair {
     requires org.json;
 
 
-    opens com.example.cashfair to javafx.fxml;
-    exports com.example.cashfair;
+    opens com to javafx.fxml;
+    exports com;
 
-    opens com.example.cashfair.views to javafx.fxml;
-    exports com.example.cashfair.views;
+    opens com.controllers to javafx.fxml;
+    exports com.controllers;
 
-    opens com.example.cashfair.entities to javafx.fxml;
-    exports com.example.cashfair.entities;
+    opens com.entities to javafx.fxml;
+    exports com.entities;
 }
