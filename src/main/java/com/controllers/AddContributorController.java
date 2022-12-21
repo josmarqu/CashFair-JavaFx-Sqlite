@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class AddContributorController {
     @FXML
-    private Spinner<Double> spnPor;
+    private Spinner<Double> spnPer;
     @FXML
     private Button btnAdd;
     @FXML
@@ -31,47 +31,72 @@ public class AddContributorController {
     @FXML
     private Button btnSplit;
     private static Contributor contributor;
-    private MoneyPaymentController moneyPayCont;
-    private static ArrayList<Contributor> listContributors = new ArrayList<>();
+    public static ArrayList<Contributor> listContributors = new ArrayList<>();
     @FXML
     public void initialize() {
         initializeWidgets();
-    }
-
-    private void initializeWidgets() {
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        initColPer();
-        spnPor.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100, 1));
-        btnBac.setOnAction(event3 -> {
-            App.redirectTo("home-screen");
-            emptyFields();
-        });
-        btnAdd.setOnAction(event -> addDataTable());
-        btnNex.setOnAction(event3 -> transferDataToPayment());
-        btnRem.setOnAction(event2 -> {
-            contributor = tblContributor.getSelectionModel().getSelectedItem();
-            if (contributor != null)
-            {
-                tblContributor.getItems().remove(contributor);
-            } else {
-                App.showAlert(Alert.AlertType.ERROR, "You must select a contributor");
-            }
-        });
-        btnSplit.setOnAction(event -> {
-            double size = tblContributor.getItems().size();
-            if (size >= 2) {
-                tblContributor.getItems().forEach(item -> item.setPercentage(100 / size));
-                tblContributor.refresh();
-            } else {
-                App.showAlert(Alert.AlertType.ERROR, "You must add at least two contributors");
-            }
-        });
         if (!listContributors.isEmpty()) {
             tblContributor.setItems(FXCollections.observableArrayList(listContributors));
+            listContributors.clear();
         }
     }
 
-    private void initColPer() {
+    private void initializeWidgets() {
+        initColumns();
+        initSpinner();
+        initButtons();
+    }
+
+    private void initButtons() {
+        btnBac.setOnAction(event3 -> {
+            App.redirectTo("home-screen");
+            listContributors.clear();
+        });
+        btnAdd.setOnAction(event -> addDataTable());
+        btnNex.setOnAction(event3 -> transferDataToPayment());
+        btnRem.setOnAction(event2 -> removeContributor());
+        btnSplit.setOnAction(event -> splitMoney());
+    }
+
+    private void splitMoney() {
+        double size = tblContributor.getItems().size();
+        if (size >= 2) {
+            tblContributor.getItems().forEach(item -> item.setPercentage(100 / size));
+            tblContributor.refresh();
+        } else {
+            App.showAlert(Alert.AlertType.ERROR, "You must add at least two contributors");
+        }
+    }
+
+    private void removeContributor() {
+        contributor = tblContributor.getSelectionModel().getSelectedItem();
+        if (contributor != null)
+        {
+            tblContributor.getItems().remove(contributor);
+        } else {
+            App.showAlert(Alert.AlertType.ERROR, "You must select a contributor");
+        }
+    }
+
+    private void initSpinner() {
+        spnPer.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100, 1));
+        TextFormatter<Double> formatter = new TextFormatter<>(spnPer.getValueFactory().getConverter(), spnPer.getValueFactory().getValue(),
+                c -> {
+                    if (c.getControlNewText().isEmpty()) {
+                        return c;
+                    }
+                    try {
+                        Double.parseDouble(c.getControlNewText());
+                        return c;
+                    } catch (NumberFormatException e) {
+                        return null;
+                    }
+                });
+        spnPer.getEditor().setTextFormatter(formatter);
+    }
+
+    private void initColumns() {
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colPor.setCellValueFactory(new PropertyValueFactory<>("percentage"));
         colPor.setCellFactory(tc -> new TableCell<Contributor, Double>() {
             @Override
@@ -96,27 +121,24 @@ public class AddContributorController {
         else {
             App.showAlert(Alert.AlertType.INFORMATION, "Contributors added");
             listContributors.addAll(tblContributor.getItems());
-            moneyPayCont = new MoneyPaymentController();
-            moneyPayCont.getDataPeople(listContributors);
             App.redirectTo("money-payment");
         }
     }
 
     private void addDataTable() {
         if(txtName.getText().isBlank()) {
-            App.showAlert(Alert.AlertType.ERROR, "You must enter the name of the contributor");
+            App.showAlert(Alert.AlertType.ERROR, "You must enter the contributor's name");
         }
-        else if (spnPor.getValue() == null) {
+        else if (spnPer.getValue() == null) {
             App.showAlert(Alert.AlertType.ERROR, "You must enter the contributor's percentage payable");
         }
-        else if (spnPor.getValue() + sumPor() > 100) {
+        else if (spnPer.getValue() + sumPor() > 100) {
             App.showAlert(Alert.AlertType.ERROR, "The percentage cannot be more than 100%");
         }
         else {
-            App.showAlert(Alert.AlertType.INFORMATION, "Contributor added");
-            contributor = new Contributor(txtName.getText(), 0.0, spnPor.getValue());
+            contributor = new Contributor(txtName.getText(), 0.0, spnPer.getValue());
             fillTable();
-            emptyFields();
+            resetFields();
         }
     }
 
@@ -132,11 +154,8 @@ public class AddContributorController {
         return sum;
     }
 
-    public void getData(ArrayList<Contributor> listContributorsSent) {
-        listContributors = listContributorsSent;
-    }
-
-    public void emptyFields() {
-        listContributors.clear();
+    private void resetFields(){
+        txtName.setText("");
+        spnPer.getValueFactory().setValue(1.0);
     }
 }

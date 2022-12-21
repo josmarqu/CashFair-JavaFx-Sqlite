@@ -79,7 +79,7 @@ public class ConceptViewController implements Initializable {
             conceptTbl.setItems(FXCollections.observableArrayList(concept.getListContributor()));
         }
         cptAmountCol.setText(concept.getCurrency());
-        conceptLbl.setText(concept.getConceptName() + "/" + concept.getDate());
+        conceptLbl.setText(concept.getConceptName() + " (" + concept.getDate() + ")");
     }
 
     public void getConceptName(String sentConceptName) {

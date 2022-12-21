@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.AddContributorController">
+<BorderPane id="background" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.AddContributorController">
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
@@ -39,13 +40,25 @@
               </rowConstraints>
                <children>
                   <TextField fx:id="txtName" promptText="Enter the name of the contributor" GridPane.valignment="TOP" />
-                  <Spinner fx:id="spnPor" editable="true" maxWidth="60.0" prefHeight="25.0" GridPane.columnIndex="1" GridPane.valignment="TOP" />
+                  <Spinner fx:id="spnPer" editable="true" maxWidth="60.0" prefHeight="25.0" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <GridPane.margin>
+                        <Insets left="3.0" />
+                     </GridPane.margin></Spinner>
                   <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="30.0" text="\%" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnAdd" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Contributor" GridPane.columnIndex="3" GridPane.valignment="TOP" />
+                  <Button fx:id="btnAdd" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="186.0" text="Add Contributor" GridPane.columnIndex="3" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets bottom="6.0" />
+                     </padding></Button>
                </children>
             </GridPane>
             <GridPane layoutX="54.0" layoutY="492.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
@@ -73,6 +86,9 @@
          <font>
             <Font name="Cantarell Regular" size="25.0" />
          </font>
+         <effect>
+            <Blend />
+         </effect>
       </Label>
    </top>
    <bottom>

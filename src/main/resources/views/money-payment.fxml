@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -14,39 +15,54 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.MoneyPaymentController">
+<BorderPane id="background" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.MoneyPaymentController">
    <top>
       <Label alignment="CENTER" text="CashFair -Payments" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
             <Font name="Cantarell Regular" size="25.0" />
          </font>
+         <effect>
+            <Blend />
+         </effect>
       </Label>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="395.0" BorderPane.alignment="CENTER">
+      <AnchorPane minWidth="450.0" prefHeight="200.0" prefWidth="395.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="moneyPaymentTable" layoutX="62.0" layoutY="5.0" prefHeight="190.0" prefWidth="333.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+            <TableView fx:id="tblPayment" layoutX="62.0" layoutY="5.0" prefHeight="190.0" prefWidth="333.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
               <columns>
-                <TableColumn fx:id="personCell" editable="false" prefWidth="112.0" style="-fx-alignment: CENTER;" text="Contributor" />
-                <TableColumn fx:id="amountCell" editable="false" prefWidth="250.0" style="-fx-alignment: CENTER;" text="Amount" />
+                <TableColumn fx:id="personCol" editable="false" prefWidth="112.0" style="-fx-alignment: CENTER;" text="Contributor" />
+                <TableColumn fx:id="amountCol" editable="false" prefWidth="250.0" style="-fx-alignment: CENTER;" text="Amount" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <GridPane alignment="CENTER" minWidth="400.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+            <GridPane prefWidth="450.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="165.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="10.0" prefWidth="110.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Spinner fx:id="moneyPaymentSpnr" maxWidth="300.0" />
-                  <Button fx:id="btnApply" maxWidth="110.0" mnemonicParsing="false" text="Apply" GridPane.columnIndex="2" />
-                  <ComboBox fx:id="moneyPaymentScrp" maxWidth="110.0" promptText="Currency" GridPane.columnIndex="1" />
+                  <Spinner fx:id="spnMoney" editable="true" maxWidth="1.7976931348623157E308" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin></Spinner>
+                  <Button fx:id="btnApply" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="150.0" text="Distribute Amount" GridPane.columnIndex="2" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets bottom="6.0" />
+                     </padding></Button>
+                  <ComboBox fx:id="cmbCurrency" maxWidth="110.0" promptText="Currency" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin></ComboBox>
                </children>
             </GridPane>
          </children>

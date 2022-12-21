@@ -5,15 +5,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ConceptViewController">
+<BorderPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ConceptViewController">
    <top>
-      <Label fx:id="conceptLbl" text="Concept/Date" BorderPane.alignment="CENTER">
+      <Label fx:id="conceptLbl" text="Concept - Date" BorderPane.alignment="CENTER">
          <font>
             <Font name="Cantarell Regular" size="25.0" />
          </font>
+         <effect>
+            <Blend />
+         </effect>
       </Label>
    </top>
    <center>

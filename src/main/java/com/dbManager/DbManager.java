@@ -19,14 +19,7 @@ public class DbManager {
             "WHERE concept_name = ?";
     final static String QUERY_GET_CONC_NAMES = "SELECT concept_name FROM concepts";
     final static String QUERY_GET_CONC_BY_CONC_NAME = "SELECT * FROM concepts WHERE concept_name =  ?";
-
     static Connection conn;
-    PreparedStatement pstmt;
-    Statement stmt;
-    ResultSet rset;
-    ArrayList<String> listConcepts;
-    Concept concept;
-    ArrayList<Contributor> listContributors;
     private static void establishDbConnection() {
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:"+FILE_NAME);
@@ -55,10 +48,10 @@ public class DbManager {
 
     public ArrayList getConceptNames() {
         establishDbConnection();
+        ArrayList<String> listConcepts = new ArrayList<String>();
         try {
-            stmt = conn.createStatement();
-            rset = stmt.executeQuery(QUERY_GET_CONC_NAMES);
-            listConcepts = new ArrayList<String>();
+            Statement stmt = conn.createStatement();
+            ResultSet rset = stmt.executeQuery(QUERY_GET_CONC_NAMES);
             while (rset.next()) {
                 listConcepts.add(rset.getString("concept_name"));
             }
@@ -71,12 +64,13 @@ public class DbManager {
 
     public Concept getConcept(String conceptNameSent) {
         establishDbConnection();
+        Concept concept = new Concept(null, null, null, null);
         try {
-            pstmt = conn.prepareStatement(QUERY_GET_CONC_BY_CONC_NAME);
+            PreparedStatement pstmt = conn.prepareStatement(QUERY_GET_CONC_BY_CONC_NAME);
             pstmt.setString(1, conceptNameSent);
-            rset = pstmt.executeQuery();
+            ResultSet rset = pstmt.executeQuery();
             if (rset.next()) {
-                listContributors = new ArrayList<Contributor>();
+                ArrayList<Contributor> listContributors = new ArrayList<Contributor>();
                 String contributors =  rset.getString("contributors");
                 String currency = rset.getString("currency");
                 String date = rset.getString("date");
@@ -110,14 +104,14 @@ public class DbManager {
             newContributor.put("percentage", contributor.getPercentage());
            listContributors.put(newContributor);
         }
-        pstmt = conn.prepareStatement(STMT_INSERT_CONTRIBUTOR);
+        PreparedStatement pstmt = conn.prepareStatement(STMT_INSERT_CONTRIBUTOR);
         pstmt.setObject(1, listContributors);
         pstmt.setString(2, concept.getConceptName());
         pstmt.executeUpdate();
     }
 
     private void insertConcept(Concept concept) throws SQLException {
-        pstmt = conn.prepareStatement(STMT_INSERT_CONCEPT);
+        PreparedStatement pstmt = conn.prepareStatement(STMT_INSERT_CONCEPT);
         pstmt.setString(1, concept.getCurrency());
         pstmt.setString(2, concept.getDate());
         pstmt.setString(3, concept.getConceptName());
