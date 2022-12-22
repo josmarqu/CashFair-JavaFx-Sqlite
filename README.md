@@ -30,5 +30,6 @@ Once the project and dependencies are loaded, start the class App.
 ## Features
 
 - JavaFx & CSS GUI
+- Light mode and dark mode style
 - Maven Project
 - Sqlite database
