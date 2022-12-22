@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DbManager {
-    final static  String FILE_NAME = "CashFair/src/main/java/com/db/CashFairDb.db";
+    final static  String FILE_NAME = "CashFairDb.db";
     final static String STMT_INSERT_CONCEPT =
             "INSERT INTO concepts (currency, date, concept_name, contributors) " +
             "VALUES (?, ?, ?, ?)";
