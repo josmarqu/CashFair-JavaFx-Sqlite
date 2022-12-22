@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.HistoryViewController">
+   <top>
+      <Label text="CashFair - Payment History " BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Cantarell Regular" size="25.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+   </top>
+   <center>
+      <ScrollPane fx:id="historyScrp" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
+         </BorderPane.margin>
+         <content>
+            <ListView fx:id="historyLstVw" prefHeight="200.0" prefWidth="200.0" />
+         </content>
+      </ScrollPane>
+   </center>
+   <bottom>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="50.0" right="50.0" />
+         </BorderPane.margin>
+         <children>
+            <Button fx:id="backBtn" layoutX="148.0" layoutY="11.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Back" AnchorPane.leftAnchor="100.0" />
+            <Button fx:id="detailsBtn" layoutX="378.0" layoutY="11.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Details" AnchorPane.rightAnchor="81.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>

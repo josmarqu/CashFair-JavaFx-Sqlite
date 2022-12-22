@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_19">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="xerial.sqlite.jdbc" level="project" />
+    <orderEntry type="library" name="json" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:19" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:linux:19" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:19" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:linux:19" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:19" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:linux:19" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:19" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:linux:19" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20220924" level="project" />
+    <orderEntry type="library" name="Maven: org.xerial:xerial-xml:2.0.6" level="project" />
+    <orderEntry type="library" name="Maven: org.xerial:xerial-core:2.0.6" level="project" />
+    <orderEntry type="library" name="Maven: org.antlr:antlr:3.2" level="project" />
+    <orderEntry type="library" name="Maven: org.antlr:antlr-runtime:3.2" level="project" />
+    <orderEntry type="library" name="Maven: org.antlr:stringtemplate:3.2" level="project" />
+    <orderEntry type="library" name="Maven: antlr:antlr:2.7.7" level="project" />
+    <orderEntry type="library" name="Maven: xpp3:xpp3:1.1.4c" level="project" />
+  </component>
+</module>

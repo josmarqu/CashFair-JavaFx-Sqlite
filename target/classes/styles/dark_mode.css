@@ -1,0 +1,119 @@
+* {
+    -fx-font-family: "Cantarell";
+    -fx-font-weight: bolder;
+}
+
+.root {
+  -fx-focus-color: #00a293;
+   -fx-base: rgba(60, 63, 65, 255);
+}
+
+.label  {
+       -fx-text-fill: #f8fefd;
+}
+
+.grid-pane {
+    -fx-max-height: 5px;
+}
+
+.button {
+    -fx-background-radius: 8px;
+    -fx-font-size: 15px;
+    -fx-background-color: #00a293;
+    -fx-text-fill: #f8fefd;
+}
+
+#bcg_hmScreen{
+    -fx-background-color: #242424;
+}
+
+#bcg_hmScreen > *{
+      -fx-text-fill: #f8fefd;
+}
+
+#background {
+    -fx-background-color: #242424;
+}
+
+.table-view {
+    -fx-padding: 0;
+    -fx-border-color: #00a293;
+    -fx-border-width: 2;
+    -fx-background-color: #242424;
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-view .table-cell {
+    -fx-text-fill:  #f8fefd;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #242424;
+}
+
+.table-view .column-header {
+    -fx-background-color: #00a293;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #f8fefd;
+}
+
+.table-view .table-row-cell:selected .table-cell {
+    -fx-text-fill: #f8fefd;
+    -fx-background-color: #343434;
+    -fx-table-cell-border-color: transparent;
+}
+
+.list-view {
+    -fx-padding: 0;
+       -fx-border-color: #00a293;
+       -fx-border-width: 2;
+       -fx-background-color: #f8fefd;
+}
+
+.list-view .list-cell {
+    -fx-background-color:  #242424;
+    -fx-border-color:   #f8fefd;
+    -fx-border-width: 0.1;
+}
+
+.list-view .list-cell:filled:selected {
+    -fx-background-color: #343434;
+}
+
+.list-view .label {
+    -fx-text-fill:  #f8fefd;
+}
+
+.combo-box-base .list-view .list-cell:filled:hover {
+      -fx-text-fill: #f8fefd;
+      -fx-background-color: #00C5B3;
+}
+
+.combo-box-base .list-view .list-cell:filled {
+      -fx-text-fill: #f8fefd;
+      -fx-background-color: #242424;
+}
+
+.combo-box-base .list-view .list-cell:filled:selected {
+      -fx-text-fill: #f8fefd;
+      -fx-background-color: #00C5B3;
+}
+
+.text-field {
+  -fx-text-fill: #f8fefd;
+  -fx-background-color: #343434;
+}
+
+.scroll-pane {
+  -fx-padding: 0;
+}
+
+.dialog-pane {
+  -fx-background-color:   #242424;
+}
+
+.dialog-pane:header .header-panel {
+  -fx-background-color:  #242424;
+}
