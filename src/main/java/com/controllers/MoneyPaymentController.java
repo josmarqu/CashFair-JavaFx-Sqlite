@@ -124,6 +124,7 @@ public class MoneyPaymentController implements Initializable {
     }
 
     private void addTableItems() {
+        tblPayment.getItems().clear();
         for (Contributor contributor : listContributors) {
             contributor.setMoney(spnMoney.getValue() * contributor.getPercentage() / 100);
         }
