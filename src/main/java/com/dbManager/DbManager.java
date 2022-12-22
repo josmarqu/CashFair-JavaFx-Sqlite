@@ -93,6 +93,7 @@ public class DbManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        closeDbConnection();
         return concept;
     }
     private void insertContributor(Concept concept) throws SQLException {
