@@ -9,5 +9,8 @@
         <module name="CashFair" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="CashFair" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>
