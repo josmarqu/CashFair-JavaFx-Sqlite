@@ -9,7 +9,7 @@ To get started clone the repository and make sure that you import the project in
 For total safety of operation, intellij is recommended.
 Once the project and dependencies are loaded, start the class App.
 
-## How to use
+## About CashFair
   
   - Home screen
     - It is the initial window which contains the name of the application and three buttons, one to switch from light to dark mode and     another two to make the payment or go to the payment history.
