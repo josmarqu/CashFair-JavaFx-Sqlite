@@ -22,7 +22,7 @@ Once the project and dependencies are loaded, start the class App.
     ![image](https://user-images.githubusercontent.com/94985283/209147426-5fe866d0-c108-457d-bad1-7d70cd965371.png)
 
   - Add money screen
-    - Where the concept name, cost to distribute and the type of currency and prevuesly information is added to the database.
+    - Where the concept name, cost to distribute and the type of currency and previously information is added to the database.
     ![image](https://user-images.githubusercontent.com/94985283/209149033-2b7293ec-4e9b-4b63-9846-426a0b2f5738.png)
     ![image](https://user-images.githubusercontent.com/94985283/209149466-4d890a01-d3fa-4214-a44d-c3e4dc955851.png)
 
